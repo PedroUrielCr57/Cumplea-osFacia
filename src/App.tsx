@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 
 import recuerdo1 from './assets/Recuerdo 1.jpeg'
 import recuerdo2 from './assets/Recuerdo 2.jpeg'
@@ -11,6 +11,13 @@ import recuerdo8 from './assets/Recuerdo 8.jpeg'
 import recuerdo9 from './assets/Recuerdo 9.jpeg'
 import recuerdo10 from './assets/Recuerdo 10.jpeg'
 import recuerdo11 from './assets/Recuerdo 11.jpeg'
+
+type TapHeart = {
+  id: number
+  x: number
+  y: number
+  emoji: string
+}
 
 const photos = [
   { src: recuerdo1, alt: 'Recuerdo 1' },
@@ -107,28 +114,26 @@ function App() {
   const tapsNeeded = 25
 
   const [showIntro, setShowIntro] = useState(true)
-  const [heartTaps, setHeartTaps] = useState(0)
   const [isOpeningLetter, setIsOpeningLetter] = useState(false)
+  const [tapHearts, setTapHearts] = useState<TapHeart[]>([])
 
-  const [tapHearts, setTapHearts] = useState<
-    Array<{ id: number; x: number; y: number; emoji: string }>
-  >([])
+  const heartTaps = useRef(0)
 
   const [showGiftModal, setShowGiftModal] = useState(false)
   const [showMemoriesModal, setShowMemoriesModal] = useState(false)
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null)
 
   const handleHeartTap = (event: MouseEvent<HTMLButtonElement>) => {
-    if (isOpeningLetter) return
+    if (isOpeningLetter || heartTaps.current >= tapsNeeded) return
 
     const emojis = ['❤️', '💖', '💕', '💗', '💘', '💝']
     const rect = event.currentTarget.getBoundingClientRect()
 
-    const newHeart = {
+    const newHeart: TapHeart = {
       id: Date.now() + Math.random(),
       x: event.clientX - rect.left,
       y: event.clientY - rect.top,
-      emoji: emojis[Math.floor(Math.random() * emojis.length)],
+      emoji: emojis[Math.floor(Math.random() * emojis.length)] ?? '❤️',
     }
 
     setTapHearts((currentHearts) => [...currentHearts, newHeart])
@@ -139,19 +144,15 @@ function App() {
       )
     }, 1200)
 
-    setHeartTaps((currentTaps) => {
-      const nextTaps = currentTaps + 1
+    heartTaps.current += 1
 
-      if (nextTaps === tapsNeeded) {
-        setIsOpeningLetter(true)
+    if (heartTaps.current >= tapsNeeded) {
+      setIsOpeningLetter(true)
 
-        setTimeout(() => {
-          setShowIntro(false)
-        }, 1400)
-      }
-
-      return nextTaps
-    })
+      setTimeout(() => {
+        setShowIntro(false)
+      }, 1400)
+    }
   }
 
   if (showIntro) {
@@ -205,7 +206,7 @@ function App() {
           </button>
 
           <p className="mt-6 text-sm text-rose-100">
-            Cada "Tab, tab" es un Te amo Facia ❤️!
+            Cada "Tap, tap" es un te amo Facia ❤️
           </p>
         </section>
       </main>
