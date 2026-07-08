@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(244, 63, 94, 0.25);
+  }
+
+  50% {
+    text-shadow: 0 0 24px rgba(244, 63, 94, 0.65);
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatingHeart {
+  0% {
+    transform: translateY(110vh) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateY(-20vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes firework {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+    box-shadow:
+      0 0 #fb7185,
+      0 0 #facc15,
+      0 0 #f472b6,
+      0 0 #ffffff,
+      0 0 #fb7185,
+      0 0 #facc15,
+      0 0 #f472b6,
+      0 0 #ffffff;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+    box-shadow:
+      0 -55px #fb7185,
+      40px -40px #facc15,
+      55px 0 #f472b6,
+      40px 40px #ffffff,
+      0 55px #fb7185,
+      -40px 40px #facc15,
+      -55px 0 #f472b6,
+      -40px -40px #ffffff;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalHeart {
+  0% {
+    transform: translateY(120px) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-260px) scale(1.3) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-cardEntrance {
+  animation: cardEntrance 0.9s ease both;
+}
+
+.animate-titleGlow {
+  animation: titleGlow 2.5s ease-in-out infinite;
+}
+
+.animate-bounceSlow {
+  animation: bounceSlow 2.2s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease both;
+}
+
+.animate-popIn {
+  animation: popIn 0.35s ease both;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -80px;
+  animation-name: floatingHeart;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0;
+  filter: drop-shadow(0 6px 10px rgba(244, 63, 94, 0.25));
+}
+
+.firework {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #fb7185;
+  animation: firework 1.8s ease-out infinite;
+}
+
+.modal-heart {
+  position: absolute;
+  bottom: -30px;
+  font-size: 24px;
+  animation: modalHeart 4s linear infinite;
+  opacity: 0;
+}
+
+@keyframes introFloatingHeart {
+  0% {
+    transform: translateY(110vh) rotate(0deg) scale(0.6);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateY(-20vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes introHeartPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 18px rgba(244, 63, 94, 0.8));
+  }
+
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 45px rgba(244, 63, 94, 1));
+  }
+}
+
+@keyframes introOpen {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  45% {
+    transform: scale(1.25) rotate(-3deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes letterUnfold {
+  0% {
+    opacity: 0;
+    transform: perspective(900px) rotateX(-85deg) scale(0.9);
+    transform-origin: top center;
+  }
+
+  60% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(12deg) scale(1.02);
+    transform-origin: top center;
+  }
+
+  100% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(0deg) scale(1);
+    transform-origin: top center;
+  }
+}
+
+.intro-floating-heart {
+  position: absolute;
+  bottom: -80px;
+  animation-name: introFloatingHeart;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+.intro-heart {
+  animation: introHeartPulse 1.4s ease-in-out infinite;
+}
+
+.intro-open {
+  animation: introOpen 1.2s ease forwards;
+}
+
+.animate-letterUnfold {
+  animation: letterUnfold 1.2s ease both;
+}
+
+@keyframes tiktokLikeHeart {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -80%) scale(1.2) rotate(-10deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -260%) scale(1.8) rotate(20deg);
+  }
+}
+
+.tiktok-like-heart {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  animation: tiktokLikeHeart 1.2s ease-out forwards;
+  font-size: 42px;
+  filter: drop-shadow(0 8px 16px rgba(244, 63, 94, 0.45));
+}
+
